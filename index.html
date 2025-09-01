@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АРКИ - Агентство развития коммунальной инфраструктуры</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            padding-top: 100px; /* Отступ для фиксированного хедера */
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: #005b96;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+        }
+        
+        .logo-text h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* Навигация */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        /* Герой-секция */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #0099cc;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #0077a3;
+        }
+        
+        /* О нас */
+        .about {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 32px;
+            color: #005b96;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Направления деятельности - Слайдер */
+        .services {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .services-slider {
+            position: relative;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+        
+        .slides-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-slide {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 15px;
+            color: #005b96;
+        }
+        
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .slider-dots {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .slider-dot.active {
+            background-color: #005b96;
+        }
+        
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        
+        .slider-btn {
+            background-color: rgba(0, 91, 150, 0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .slider-btn:hover {
+            background-color: rgba(0, 91, 150, 1);
+        }
+        
+        /* Проекты */
+        .projects {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-content h3 {
+            margin-bottom: 15px;
+            color: #005b96;
+        }
+        
+        /* Контакты */
+        .contact {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .contact-details, .contact-form {
+            flex: 1;
+            padding: 0 20px;
+        }
+        
+        .contact-details h3, .contact-form h3 {
+            margin-bottom: 20px;
+            color: #005b96;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            color: #0099cc;
+        }
+        
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .contact-form textarea {
+            height: 120px;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: #005b96;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Кнопки прокрутки */
+        .scroll-btn {
+            position: fixed;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #0099cc;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        
+        .scroll-btn:hover {
+            background-color: #0077a3;
+        }
+        
+        .scroll-up {
+            bottom: 100px;
+        }
+        
+        .scroll-down {
+            bottom: 30px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 150px; /* Больший отступ для мобильных */
+            }
+            
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .service-slide {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+            }
+            
+            .contact-details, .contact-form {
+                margin-bottom: 30px;
+            }
+            
+            .scroll-btn {
+                width: 40px;
+                height: 40px;
+                right: 15px;
+            }
+            
+            .scroll-up {
+                bottom: 90px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка с логотипом и навигацией -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://avatars.mds.yandex.net/i?id=b8755e67b50106ae18fec931ef988e25_l-5888917-images-thumbs&n=13" alt="Логотип АРКИ">
+                <div class="logo-text">
+                    <h1>АРКИ</h1>
+                    <p>Агентство развития коммунальной инфраструктуры</p>
+                </div>
+            </div>
+            <nav>
+    <ul>
+    <li><a href="#about">О нас</a></li>
+    <li><a href="#services">Направления</a></li>
+    <li><a href="#projects">Проекты</a></li>
+    <li><a href="#contact">Контакты</a></li>
+    <li>
+        <button id="authButton" class="btn auth-btn">Войти / Регистрация</button>
+    </li>
+</ul>
+</nav>
+        </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <h2>Развитие коммунальной инфраструктуры для будущего</h2>
+            <p>Мы создаем современные решения для устойчивого развития городов и населенных пунктов</p>
+            <a href="#contact" class="btn">Связаться с нами</a>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">О нашем агентстве</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Агентство развития коммунальной инфраструктуры (АРКИ) - это организация, занимающаяся модернизацией и развитием систем жизнеобеспечения городов и населенных пунктов.</p>
+                    <p>Наша миссия - создание комфортной и безопасной среды проживания через внедрение инновационных технологий в сфере ЖКХ, энергетики, водоснабжения и других коммунальных услуг.</p>
+                    <p>С 2010 года мы реализовали более 200 проектов по всей стране, улучшив качество жизни для миллионов людей.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Городская инфраструктура">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Направления деятельности -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Направления деятельности</h2>
+            <div class="services-slider">
+                <div class="slides-container">
+                    <!-- Слайд 1 -->
+                    <div class="service-slide">
+                        <div class="service-card">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Водоснабжение">
+                            <div class="service-content">
+                                <h3>Водоснабжение и водоотведение</h3>
+                                <p>Модернизация систем водоснабжения, строительство очистных сооружений, внедрение smart-технологий в управление водными ресурсами.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Энергетика">
+                            <div class="service-content">
+                                <h3>Энергетика и теплоснабжение</h3>
+                                <p>Развитие энергоэффективных технологий, реконструкция тепловых сетей, внедрение возобновляемых источников энергии.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Благоустройство">
+                            <div class="service-content">
+                                <h3>Благоустройство территорий</h3>
+                                <p>Создание комфортной городской среды, парков, зон отдыха, развитие пешеходной инфраструктуры и общественных пространств.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Слайд 2 -->
+                    <div class="service-slide">
+                        <div class="service-card">
+                            <img src="https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Транспорт">
+                            <div class="service-content">
+                                <h3>Транспортная инфраструктура</h3>
+                                <p>Развитие дорожной сети, парковочных пространств, велодорожек и общественного транспорта для улучшения мобильности.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Обращение с отходами">
+                            <div class="service-content">
+                                <h3>Обращение с отходами</h3>
+                                <p>Внедрение систем раздельного сбора, переработки и утилизации отходов, строительство современных мусороперерабатывающих комплексов.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Цифровизация">
+                            <div class="service-content">
+                                <h3>Цифровизация ЖКХ</h3>
+                                <p>Внедрение интеллектуальных систем учета ресурсов, автоматизация управляющих компаний, создание цифровых платформ для жителей.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Слайд 3 -->
+                    <div class="service-slide">
+                        <div class="service-card">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Социальная инфраструктура">
+                            <div class="service-content">
+                                <h3>Социальная инфраструктура</h3>
+                                <p>Строительство и модернизация школ, детских садов, поликлиник и других социально значимых объектов.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="https://images.unsplash.com/photo-1486401899868-0e435ed85128?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Инженерные сети">
+                            <div class="service-content">
+                                <h3>Инженерные сети</h3>
+                                <p>Комплексная модернизация инженерных коммуникаций: электроснабжение, газоснабжение, канализация, телекоммуникации.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Экология">
+                            <div class="service-content">
+                                <h3>Экология и устойчивое развитие</h3>
+                                <p>Программы по улучшению экологической обстановки, озеленению, снижению выбросов и повышению энергоэффективности.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Навигационные кнопки -->
+                <div class="slider-nav">
+                    <button class="slider-btn" onclick="prevSlide()">&#10094;</button>
+                    <button class="slider-btn" onclick="nextSlide()">&#10095;</button>
+                </div>
+                
+                <!-- Точки для навигации -->
+                <div class="slider-controls">
+                    <div class="slider-dots">
+                        <div class="slider-dot active" onclick="goToSlide(0)"></div>
+                        <div class="slider-dot" onclick="goToSlide(1)"></div>
+                        <div class="slider-dot" onclick="goToSlide(2)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Проекты -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Наши проекты</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=85583655802821159d731e1fe7f0cc9bd36d880e-10640350-images-thumbs&n=13" alt="Эко-квартал">
+                    <div class="project-content">
+                        <h3>Эко-квартал "Зеленый город"</h3>
+                        <p>Комплексная модернизация жилого квартала с внедрением энергосберегающих технологий, систем "умного дома" и зеленых зон. Снижение энергопотребления на 40%.</p>
+                        <p><strong>Год реализации:</strong> 2021</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=079b6f5762ce3a0847b2b44b41be6b33f5d89122-8710632-images-thumbs&n=13" alt="Водоочистные сооружения">
+                    <div class="project-content">
+                        <h3>Водоочистные сооружения "Чистый источник"</h3>
+                        <p>Строительство современных очистных сооружений с многоступенчатой системой фильтрации. Обеспечили чистой водой 500 000 жителей.</p>
+                        <p><strong>Год реализации:</strong> 2019</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://teplosfera.1c-umi.ru/images/cms/thumbs/a5b0aeaa3fa7d6e58d75710c18673bd7ec6d5f6d/35dab0e7293982c580a7904ae360442b_auto_780.jpg" alt="Тепловые сети">
+                    <div class="project-content">
+                        <h3>Реконструкция тепловых сетей "Теплый город"</h3>
+                        <p>Модернизация 25 км тепловых сетей с использованием современных изоляционных материалов. Снижение теплопотерь на 60%.</p>
+                        <p><strong>Год реализации:</strong> 2020</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=9d24852f0ec75eb7a8aff272c5e37444_l-5255188-images-thumbs&n=13" alt="Парковая зона">
+                    <div class="project-content">
+                        <h3>Парковая зона "Оазис"</h3>
+                        <p>Создание многофункциональной парковой зоны с системой "умного" освещения, Wi-Fi покрытием и экологичными материалами.</p>
+                        <p><strong>Год реализации:</strong> 2022</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АРКИ - Агентство развития коммунальной инфраструктуры</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            color: #333;
+            line-height: 1.6;
+            padding-top: 100px; /* Отступ для фиксированного хедера */
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Шапка */
+        header {
+            background-color: #005b96;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+        }
+        .logo-text h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .logo-text p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        /* Навигация */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        nav ul li a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        /* Герой-секция */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80  ');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #0099cc;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0077a3;
+        }
+        /* О нас */
+        .about {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 32px;
+            color: #005b96;
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .about-text {
+            flex: 1;
+        }
+        .about-image {
+            flex: 1;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        /* Направления деятельности - Слайдер */
+        .services {
+            padding: 80px 0;
+            position: relative;
+        }
+        .services-slider {
+            position: relative;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+        .slides-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .service-slide {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .service-content {
+            padding: 20px;
+        }
+        .service-content h3 {
+            margin-bottom: 15px;
+            color: #005b96;
+        }
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .slider-dots {
+            display: flex;
+            gap: 10px;
+        }
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .slider-dot.active {
+            background-color: #005b96;
+        }
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        .slider-btn {
+            background-color: rgba(0, 91, 150, 0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        .slider-btn:hover {
+            background-color: rgba(0, 91, 150, 1);
+        }
+        /* Проекты */
+        .projects {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .project-content {
+            padding: 20px;
+        }
+        .project-content h3 {
+            margin-bottom: 15px;
+            color: #005b96;
+        }
+        /* Контакты */
+        .contact {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .contact-details, .contact-form {
+            flex: 1;
+            padding: 0 20px;
+        }
+        .contact-details h3, .contact-form h3 {
+            margin-bottom: 20px;
+            color: #005b96;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .contact-item i {
+            margin-right: 10px;
+            color: #0099cc;
+        }
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .contact-form textarea {
+            height: 120px;
+        }
+        /* Подвал */
+        footer {
+            background-color: #005b96;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        /* Кнопки прокрутки */
+        .scroll-btn {
+            position: fixed;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #0099cc;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        .scroll-btn:hover {
+            background-color: #0077a3;
+        }
+        .scroll-up {
+            bottom: 100px;
+        }
+        .scroll-down {
+            bottom: 30px;
+        }
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 150px; /* Больший отступ для мобильных */
+            }
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                margin-top: 20px;
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 5px 0;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+            .service-slide {
+                grid-template-columns: 1fr;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-info {
+                flex-direction: column;
+            }
+            .contact-details, .contact-form {
+                margin-bottom: 30px;
+            }
+            .scroll-btn {
+                width: 40px;
+                height: 40px;
+                right: 15px;
+            }
+            .scroll-up {
+                bottom: 90px;
+            }
+        }
+        /* Стили для отзывов */
+        .review-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #0099cc;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .review-card h4 {
+            margin-bottom: 5px;
+            color: #005b96;
+            font-size: 16px;
+        }
+        .review-card small {
+            display: block;
+            color: #888;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        .review-card p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .rating-stars {
+            color: gold;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+.auth-btn {
+    background-color: #0099cc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+.auth-btn:hover {
+    background-color: #0077a3;
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css  ">
+</head>
+<body>
+
+<!-- Контакты -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2 class="section-title">Контакты</h2>
+
+        <!-- Блок с контактами -->
+        <div class="contact-details">
+            <h3>Наши контактные данные</h3>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Московская область, г. Красногорск, бульвар Строителей, д. 1</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+7 (495) 123-45-67</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@arki-agency.ru</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-clock"></i>
+                <span>Пн-Пт: 9:00 - 18:00</span>
+            </div>
+        </div>
+
+        <!-- Форма отзыва -->
+        <div class="contact-form">
+            <h3>Оставить отзыв</h3>
+            <form id="reviewForm">
+                <input type="text" id="name" placeholder="Ваше имя" required />
+                <input type="email" id="email" placeholder="Email" required />
+                <select id="rating" required>
+                    <option value="">Оцените нас</option>
+                    <option value="5">⭐⭐⭐⭐⭐ Отлично</option>
+                    <option value="4">⭐⭐⭐⭐ Хорошо</option>
+                    <option value="3">⭐⭐⭐ Нормально</option>
+                    <option value="2">⭐⭐ Плохо</option>
+                    <option value="1">⭐ Очень плохо</option>
+                </select>
+                <textarea id="message" placeholder="Ваш отзыв" required></textarea>
+                <button type="submit" class="btn">Отправить отзыв</button>
+            </form>
+            <h3 style="margin-top: 30px;">Отзывы</h3>
+            <div id="reviewsContainer" style="display: flex; flex-direction: column; gap: 15px;"></div>
+        </div>
+
+        <!-- Карта -->
+        <div id="map" style="width: 100%; height: 400px; margin-top: 30px;"></div>
+    </div>
+</section>
+
+<!-- Яндекс.Карты -->
+<script src="https://api-maps.yandex.ru/2.1/?apikey= ваш_ключ&lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript">
+    ymaps.ready(function () {
+        var myMap = new ymaps.Map('map', {
+                center: [55.814719, 37.385316],
+                zoom: 16
+            }),
+            myPlacemark = new ymaps.Placemark([55.814719, 37.385316], {
+                hintContent: 'АРКИ',
+                balloonContent: 'Агентство развития коммунальной инфраструктуры'
+            });
+        myMap.geoObjects.add(myPlacemark);
+    });
+</script>
+
+<!-- Отзывы -->
+<script>
+// --- ТВОЯ ССЫЛКА ИЗ GOOGLE APPS SCRIPT ---
+const API_URL = 'https://script.google.com/macros/s/AKfycbxbiUFP0vzdfgaKMZui48jS1j1R9waO94rE8Ru0MCRLJlDuotA8XxnylxHIbqSClFai/exec';
+
+// --- Загрузка отзывов при открытии сайта ---
+async function loadReviews() {
+  try {
+    const response = await fetch(API_URL);
+    const reviews = await response.json();
+    const container = document.getElementById("reviewsContainer");
+    container.innerHTML = "";
+
+    if (reviews.length === 0) {
+      container.innerHTML = '<p>Пока нет отзывов. Будьте первым!</p>';
+      return;
+    }
+
+    reviews.forEach(review => {
+      const stars = '⭐'.repeat(parseInt(review.rating));
+      const reviewHTML = `
+        <div class="review-card">
+          <h4>${review.name}</h4>
+          <small>${review.email}</small>
+          <div class="rating-stars">${stars}</div>
+          <p>${review.message}</p>
+          <small style="color: #888; font-size: 11px;">${review.date || ''}</small>
+        </div>
+      `;
+      container.insertAdjacentHTML("beforeend", reviewHTML);
+    });
+  } catch (error) {
+    console.error("Ошибка загрузки отзывов:", error);
+    document.getElementById("reviewsContainer").innerHTML = '<p>Не удалось загрузить отзывы.</p>';
+  }
+}
+
+// --- Отправка отзыва ---
+document.getElementById("reviewForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const rating = document.getElementById("rating").value;
+
+  if (!name || !email || !message || !rating) {
+    alert("Пожалуйста, заполните все поля.");
+    return;
+  }
+
+  const data = { name, email, message, rating };
+
+  try {
+    await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    // Добавляем отзыв на страницу (без перезагрузки)
+    const stars = '⭐'.repeat(parseInt(rating));
+    const reviewHTML = `
+      <div class="review-card">
+        <h4>${name}</h4>
+        <small>${email}</small>
+        <div class="rating-stars">${stars}</div>
+        <p>${message}</p>
+        <small style="color: #888; font-size: 11px;">Сейчас</small>
+      </div>
+    `;
+    document.getElementById("reviewsContainer").insertAdjacentHTML("afterbegin", reviewHTML);
+
+    // Очистка формы
+    document.getElementById("reviewForm").reset();
+  } catch (error) {
+    alert("Ошибка отправки отзыва. Попробуйте позже.");
+    console.error(error);
+  }
+});
+
+// --- Загружаем отзывы при загрузке страницы ---
+document.addEventListener("DOMContentLoaded", loadReviews);
+</script>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#about">О нас</a>
+                <a href="#services">Услуги</a>
+                <a href="#projects">Проекты</a>
+                <a href="#contact">Контакты</a>
+                <a href="#">Документы</a>
+            </div>
+            <p>&copy; 2023 АРКИ - Агентство развития коммунальной инфраструктуры. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Кнопки прокрутки -->
+    <div class="scroll-btn scroll-up" onclick="scrollToSection('up')">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    <div class="scroll-btn scroll-down" onclick="scrollToSection('down')">
+        <i class="fas fa-arrow-down"></i>
+    </div>
+
+    <script>
+        // Функция для плавной прокрутки
+        function scrollToSection(direction) {
+            const sections = ['hero', 'about', 'services', 'projects', 'contact'];
+            const currentPosition = window.scrollY;
+            let targetSection = '';
+            let targetIndex = -1;
+            
+            // Находим текущую секцию
+            for (let i = 0; i < sections.length; i++) {
+                const section = document.getElementById(sections[i]);
+                if (section && section.offsetTop <= currentPosition + 100 && 
+                    section.offsetTop + section.offsetHeight > currentPosition + 100) {
+                    targetIndex = i;
+                    break;
+                }
+            }
+            
+            if (direction === 'up') {
+                // Прокрутка вверх - предыдущая секция
+                if (targetIndex > 0) {
+                    targetSection = sections[targetIndex - 1];
+                } else {
+                    // Если это первая секция - наверх страницы
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+            } else {
+                // Прокрутка вниз - следующая секция
+                if (targetIndex < sections.length - 1) {
+                    targetSection = sections[targetIndex + 1];
+                } else {
+                    // Если это последняя секция - вниз страницы
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                    return;
+                }
+            }
+            
+            // Прокручиваем к найденной секции
+            const targetElement = document.getElementById(targetSection);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 90, // Учитываем высоту фиксированного хедера
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // Показываем/скрываем кнопки при прокрутке
+        window.addEventListener('scroll', function() {
+            const scrollUpBtn = document.querySelector('.scroll-up');
+            const scrollDownBtn = document.querySelector('.scroll-down');
+            
+            if (window.scrollY > 200) {
+                scrollUpBtn.style.display = 'flex';
+            } else {
+                scrollUpBtn.style.display = 'none';
+            }
+            
+            if (window.scrollY < document.body.scrollHeight - window.innerHeight - 200) {
+                scrollDownBtn.style.display = 'flex';
+            } else {
+                scrollDownBtn.style.display = 'none';
+            }
+        });
+        
+        // Слайдер для направлений деятельности
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.service-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const slidesContainer = document.querySelector('.slides-container');
+        let slideInterval;
+        
+        // Инициализация слайдера
+        function initSlider() {
+            updateSlider();
+            startSlideTimer();
+        }
+        
+        // Обновление отображения слайдера
+        function updateSlider() {
+            slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Обновление активной точки
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        // Переход к конкретному слайду
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateSlider();
+            resetSlideTimer();
+        }
+        
+        // Следующий слайд
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlider();
+            resetSlideTimer();
+        }
+        
+        // Предыдущий слайд
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlider();
+            resetSlideTimer();
+        }
+        
+        // Запуск таймера автоматического перелистывания
+        function startSlideTimer() {
+            slideInterval = setInterval(nextSlide, 10000); // 10 секунд
+        }
+        
+        // Сброс таймера при ручном переключении
+        function resetSlideTimer() {
+            clearInterval(slideInterval);
+            startSlideTimer();
+        }
+        
+        // Инициализация слайдера при загрузке страницы
+        document.addEventListener('DOMContentLoaded', initSlider);
+    </script>
+
+
+
+
+<!-- Модальное окно для входа -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeLoginModal()">&times;</span>
+        <h3>Вход в аккаунт</h3>
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPassword" placeholder="Пароль" required>
+        <p id="loginError" style="color:red;"></p>
+        <button onclick="login()" class="btn">Войти</button>
+        <p>Нет аккаунта? <a href="#" onclick="openRegisterModal()">Зарегистрируйтесь</a></p>
+    </div>
+</div>
+
+<!-- Модальное окно для регистрации -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeRegisterModal()">&times;</span>
+        <h3>Регистрация</h3>
+        <input type="text" id="registerName" placeholder="ФИО">
+        <input type="email" id="registerEmail" placeholder="Email">
+        <input type="password" id="registerPassword" placeholder="Пароль">
+        <p id="registerError" style="color:red;"></p>
+        <button onclick="register()" class="btn">Зарегистрироваться</button>
+        <p>Уже есть аккаунт? <a href="#" onclick="openLoginModal()">Войдите</a></p>
+    </div>
+</div>
+
+<style>
+    /* Стили для модальных окон */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.6);
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-content {
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 30px;
+        border-radius: 8px;
+        width: 300px;
+        position: relative;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .modal-content h3 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .modal-content input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .close {
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    const loginModal = document.getElementById("loginModal");
+    const registerModal = document.getElementById("registerModal");
+    const authButton = document.getElementById("authButton");
+
+    function openLoginModal() {
+        closeRegisterModal();
+        loginModal.style.display = "flex";
+    }
+
+    function closeLoginModal() {
+        loginModal.style.display = "none";
+        document.getElementById("loginError").textContent = "";
+    }
+
+    function openRegisterModal() {
+        closeLoginModal();
+        registerModal.style.display = "flex";
+    }
+
+    function closeRegisterModal() {
+        registerModal.style.display = "none";
+        document.getElementById("registerError").textContent = "";
+    }
+
+    function login() {
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        if (email === "serg151204@yandex.ru" && password === "Test") {
+            localStorage.setItem("user", "Григорьев Сергей Сергеевич");
+            updateAuthButton();
+            closeLoginModal();
+        } else {
+            document.getElementById("loginError").textContent = "Неверный логин или пароль";
+        }
+    }
+
+    function register() {
+        const name = document.getElementById("registerName").value.trim();
+        const email = document.getElementById("registerEmail").value.trim();
+        const password = document.getElementById("registerPassword").value.trim();
+
+        if (!name || !email || !password) {
+            document.getElementById("registerError").textContent = "Заполните все поля";
+            return;
+        }
+
+        localStorage.setItem("registeredUser", JSON.stringify({ name, email, password }));
+        alert("Вы успешно зарегистрированы!");
+        closeRegisterModal();
+        openLoginModal();
+    }
+
+    function logout() {
+        if (confirm("Вы действительно хотите выйти?")) {
+            localStorage.removeItem("user");
+            updateAuthButton();
+        }
+    }
+
+    function updateAuthButton() {
+        const user = localStorage.getItem("user");
+        if (user) {
+            authButton.innerHTML = `
+                👤 ${user} 
+                <button onclick="logout()" style="margin-left: 10px; background: none; border: none; color: white; font-weight: bold; cursor: pointer;">Выход</button>
+            `;
+            authButton.onclick = null;
+        } else {
+            authButton.textContent = "Войти / Регистрация";
+            authButton.onclick = openLoginModal;
+        }
+    }
+
+    // Проверка при загрузке страницы
+    window.onload = () => {
+        updateAuthButton();
+    };
+</script>
+
+
+
+</body>
+</html>
